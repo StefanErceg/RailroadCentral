@@ -27,7 +27,7 @@ public class CityService {
 	
 	public City getById(String id) {
 		JSONObject data = DataSource.getFromMap(key, id);
-		return data.toString() != null ? gson.fromJson(data.toString(), City.class) : null;
+		return data != null ? gson.fromJson(data.toString(), City.class) : null;
 	}
 	
 	public boolean add(City city) {

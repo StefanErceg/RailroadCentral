@@ -3,17 +3,11 @@ package org.unibl.etf.mdp.railroad.api;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.unibl.etf.mdp.railroad.data.DataSource;
 import org.unibl.etf.mdp.railroad.model.Country;
 
 import com.google.gson.Gson;
-
-
-import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
-
 
 public class CountryService {
 	
@@ -32,7 +26,7 @@ public class CountryService {
 	
 	public Country getById(String id) {
 		JSONObject data = DataSource.getFromMap(key, id);
-		return data.toString() != null ? gson.fromJson(data.toString(), Country.class) : null;
+		return data != null ? gson.fromJson(data.toString(), Country.class) : null;
 	}
 	
 	public boolean add(Country country) {

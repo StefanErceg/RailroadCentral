@@ -27,7 +27,10 @@ public class DataSource {
 	public static JSONObject getFromMap(String key, String field) {
 		JSONObject json = null;
 		try (Jedis jedis = pool.getResource()) {
+			String value = jedis.hget(key, field);
+			if (value != null) {
 			json = new JSONObject(jedis.hget(key, field));
+			}
 		}
 		return json;
 	}

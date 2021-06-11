@@ -3,8 +3,10 @@ package org.unibl.etf.mdp.railroad.mock;
 
 import org.unibl.etf.mdp.railroad.api.CityService;
 import org.unibl.etf.mdp.railroad.api.CountryService;
+import org.unibl.etf.mdp.railroad.api.TrainStationService;
 import org.unibl.etf.mdp.railroad.model.City;
 import org.unibl.etf.mdp.railroad.model.Country;
+import org.unibl.etf.mdp.railroad.model.TrainStation;
 
 public class Mock {
 	private static boolean generated = false;
@@ -13,6 +15,7 @@ public class Mock {
 		if (!generated) {
 			CountryService countryService = new CountryService();
 			CityService cityService = new CityService();
+			TrainStationService trainStationService = new TrainStationService();
 		Country serbia = new Country("Serbia", "SR");
 		Country republicOfSrpska = new  Country("Republic of Srpska", "RS");
 		Country russia = new Country("Russia", "RU");
@@ -38,6 +41,13 @@ public class Mock {
 		cityService.add(paris);
 		cityService.add(munich);
 		cityService.add(atina);
+		
+		TrainStation BL = new TrainStation("Glavna zeljeznicka stanica", banjaluka);
+		TrainStation BG = new TrainStation("Centralna zeleznicka stanica", belgrade);
+		TrainStation MS = new TrainStation("Moscow Leningradsky railway station", moscow);
+		trainStationService.add(BL);
+		trainStationService.add(BG);
+		trainStationService.add(MS);
 		}
 		
 	}
