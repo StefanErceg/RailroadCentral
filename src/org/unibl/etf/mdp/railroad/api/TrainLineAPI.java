@@ -37,6 +37,13 @@ public class TrainLineAPI {
 		return Response.status(404).build();
 	}
 	
+	@GET
+	@Path("/{trainStationId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainLine> getByTrainStation(@PathParam("trainStationId") String trainStationId) {
+		return service.getByTrainStation(trainStationId);
+	}
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -58,6 +65,18 @@ public class TrainLineAPI {
 		return Response.status(404).build();
 	}
 	
+	@PUT
+	@Path("/{id}/{trainStationId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response markPassed(@PathParam("id") String id, @PathParam("trainStationId") String trainStationId) {
+		TrainLine updated = service.markPassed(id, trainStationId);
+		if (updated != null) {
+			return Response.status(200).entity(updated).build();
+		}
+		return Response.status(404).build();
+	}
+	
 	@DELETE
 	@Path("/{id}")
 	public Response remove(@PathParam("id") String id) {
@@ -66,4 +85,5 @@ public class TrainLineAPI {
 		}
 		return Response.status(404).build();
 	}
+
 }

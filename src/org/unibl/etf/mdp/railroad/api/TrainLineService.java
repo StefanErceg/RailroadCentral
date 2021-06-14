@@ -1,6 +1,7 @@
 package org.unibl.etf.mdp.railroad.api;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -25,6 +26,18 @@ public class TrainLineService {
 		return trainLines;
 	}
 	
+	public ArrayList<TrainLine> getByTrainStation(String trainStationId) {
+		List<String> data = DataSource.getValues(key);
+		ArrayList<TrainLine> trainLines = new ArrayList<>();
+		data.forEach((value) -> {
+			TrainLine trainLine = gson.fromJson(value, TrainLine.class);
+			if (passesThroughTrainStation(trainLine, trainStationId)) {
+				trainLines.add(trainLine);
+			}
+		});
+		return trainLines;
+	}
+	
 	public TrainLine getById(String id) {
 		JSONObject data = DataSource.getFromMap(key, id);
 		return data != null ?  gson.fromJson(data.toString(), TrainLine.class) : null;
@@ -43,22 +56,39 @@ public class TrainLineService {
 		return DataSource.addToMap(key, trainLine.getId(), new JSONObject(trainLine));
 	}
 	
-	public boolean markPassed(String trainLineId, TrainStop trainStop) {
+	public TrainLine markPassed(String trainLineId, String trainStationId) {
 		JSONObject data = DataSource.getFromMap(key, trainLineId);
 		if (data != null) {
 			TrainLine trainLine = gson.fromJson(data.toString(), TrainLine.class);
-			Integer index = trainLine.getStops().indexOf(trainStop); // equals is overridden so search will be by id only
+			ArrayList<TrainStop> trainStops = trainLine.getStops();
+			Integer index = getIndex(trainStops, trainStationId);
 			if (index != -1) {
+				TrainStop trainStop = trainLine.getStops().get(index);
+				trainStop.setActualTime(new Date());
+				trainStop.setPassed(true);
 				trainLine.getStops().set(index, trainStop);
 			}
-			return DataSource.addToMap(key, trainLineId, new JSONObject(trainLine));
+			if (DataSource.addToMap(key, trainLineId, new JSONObject(trainLine))) {
+				return trainLine;
+			}
 		}
 		
-		return false;
+		return null;
 	}
 	
 	public boolean remove (String trainLineId) {
 		return DataSource.removeFromMap(key, trainLineId);
+	}
+	
+	private Integer getIndex(ArrayList<TrainStop> trainStops, String trainStationId) {
+		for (int index = 0; index < trainStops.size(); index++) {
+			if (trainStops.get(index).getTrainStation().getId() == trainStationId) return index;  
+		}
+		return -1;
+	}
+	
+	private boolean passesThroughTrainStation(TrainLine trainLine, String trainStationId) {
+		return trainLine.getStart().getId() == trainStationId || trainLine.getDestination().getId() == trainStationId || getIndex(trainLine.getStops(), trainStationId) != -1;
 	}
 	
 
