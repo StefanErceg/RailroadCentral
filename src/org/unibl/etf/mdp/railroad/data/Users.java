@@ -129,7 +129,7 @@ public class Users {
 		
 	}
 	
-	public static String login(String username, String password) {
+	public static User login(String username, String password) {
 		  DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		  
 		  	      try {
@@ -147,13 +147,14 @@ public class Users {
 		  	              if (node.getNodeType() == Node.ELEMENT_NODE) {
 		  
 		  	                  Element element = (Element) node;
-
+		  	                String firstName = element.getElementsByTagName("firstName").item(0).getTextContent();
+		 	                  String lastName = element.getElementsByTagName("lastName").item(0).getTextContent();
 		  	                  String usernameValue = element.getElementsByTagName("username").item(0).getTextContent();
 		  	                  String passwordValue = element.getElementsByTagName("password").item(0).getTextContent();
 		  	                  String locationId = element.getElementsByTagName("locationId").item(0).getTextContent();
 		  	                  String active = element.getElementsByTagName("active").item(0).getTextContent();
 		  	                  if (username.equals(usernameValue) && (getHash(password)).equals(passwordValue)) {
-		  	                	   return "1".equals(active) ? locationId : null;
+		  	                	   return "1".equals(active) ? new User(firstName, lastName, usernameValue, locationId) : null;
 		  	                  }
 		  	              }
 		  	          }
