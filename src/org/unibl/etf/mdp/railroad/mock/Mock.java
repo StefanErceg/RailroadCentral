@@ -8,14 +8,21 @@ import org.unibl.etf.mdp.railroad.model.City;
 import org.unibl.etf.mdp.railroad.model.Country;
 import org.unibl.etf.mdp.railroad.model.TrainStation;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 public class Mock {
-	private static boolean generated = false;
 
 	public static void generateData() {
-		if (!generated) {
-			CountryService countryService = new CountryService();
-			CityService cityService = new CityService();
-			TrainStationService trainStationService = new TrainStationService();
+		JedisPool pool = new JedisPool("localhost");
+		try (Jedis jedis = pool.getResource()) {
+		jedis.del("countries");
+		jedis.del("cities");
+		jedis.del("trainStations");
+
+		CountryService countryService = new CountryService();
+		CityService cityService = new CityService();
+		TrainStationService trainStationService = new TrainStationService();
 		Country serbia = new Country("Serbia", "SR");
 		Country republicOfSrpska = new  Country("Republic of Srpska", "RS");
 		Country russia = new Country("Russia", "RU");
@@ -48,6 +55,10 @@ public class Mock {
 		trainStationService.add(BL);
 		trainStationService.add(BG);
 		trainStationService.add(MS);
+		System.out.println(jedis.hvals("trainStations"));
+		
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
