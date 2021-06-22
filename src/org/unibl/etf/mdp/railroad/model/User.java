@@ -1,14 +1,20 @@
 package org.unibl.etf.mdp.railroad.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = -888500706452227404L;
+	
 	private String firstName;
 	private String lastName;
 	private String username;
 	private String password;
 	private String locationId;
 	private Integer active;
+	
+	public User() {
+	}
 	
 	public User(String firstName, String lastName, String username, String password, String locationId) {
 		super();

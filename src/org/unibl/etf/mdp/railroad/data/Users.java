@@ -64,7 +64,6 @@ public class Users {
  	                  String firstName = element.getElementsByTagName("firstName").item(0).getTextContent();
  	                  String lastName = element.getElementsByTagName("lastName").item(0).getTextContent();
  	                  String username = element.getElementsByTagName("username").item(0).getTextContent();
- 	                  String password = element.getElementsByTagName("password").item(0).getTextContent();
  	                  String locationId = element.getElementsByTagName("locationId").item(0).getTextContent();
  	                  String active = element.getElementsByTagName("active").item(0).getTextContent();
  	                  if ("1".equals(active)) {
@@ -92,6 +91,21 @@ public class Users {
 	        if (users == null) {
 	        	users =  doc.createElement("users");
 	        }
+	        NodeList list = doc.getElementsByTagName("user");
+	        
+	          for (int index = 0; index < list.getLength(); index++) {
+
+	              Node node = list.item(index);
+	              if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+	                  Element element = (Element) node;
+	                  String usernameValue = element.getElementsByTagName("username").item(0).getTextContent();
+	                  if (user.getUsername().equals(usernameValue)) {
+	                	   return false;
+	                  }
+	              }
+	          }
+	        
 	        Node newUser = doc.createElement("user");
 	        Node firstName = doc.createElement("firstName");
 	        firstName.setTextContent(user.getFirstName());
@@ -127,6 +141,38 @@ public class Users {
 			return false;
 		}
 		
+	}
+	
+	public static boolean usernameExists(String username) {
+		 DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		  
+ 	      try {
+ 	          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+ 	          DocumentBuilder db = dbf.newDocumentBuilder();
+ 	          Document doc = db.parse(new File(FILE));
+ 	          doc.getDocumentElement().normalize();
+ 
+ 	          NodeList list = doc.getElementsByTagName("user");
+ 
+ 	          for (int index = 0; index < list.getLength(); index++) {
+ 
+ 	              Node node = list.item(index);
+ 	              if (node.getNodeType() == Node.ELEMENT_NODE) {
+ 
+ 	                  Element element = (Element) node;
+ 	                  String usernameValue = element.getElementsByTagName("username").item(0).getTextContent();
+ 	                  if (username.equals(usernameValue)) {
+ 	                	   return true;
+ 	                  }
+ 	              }
+ 	          }
+ 	          return false;
+ 
+ 	      } catch (ParserConfigurationException | SAXException | IOException e) {
+ 	          e.printStackTrace();
+ 	          return false;
+ 	      }
 	}
 	
 	public static User login(String username, String password) {

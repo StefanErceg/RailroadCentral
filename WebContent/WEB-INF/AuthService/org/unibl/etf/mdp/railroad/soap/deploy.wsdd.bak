@@ -1,0 +1,41 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AuthService WSDL service -->
+
+  <service name="Auth" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://soap.railroad.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServiceElement" value="AuthService"/>
+      <parameter name="schemaQualified" value="http://model.railroad.mdp.etf.unibl.org,http://soap.railroad.mdp.etf.unibl.org"/>
+      <parameter name="wsdlServicePort" value="Auth"/>
+      <parameter name="className" value="org.unibl.etf.mdp.railroad.soap.AuthSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="Auth"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="login" qname="operNS:login" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:loginReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:User" xmlns:rtns="http://model.railroad.mdp.etf.unibl.org" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="usernameExists" qname="operNS:usernameExists" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:usernameExistsReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="usernameExists login"/>
+
+      <typeMapping
+        xmlns:ns="http://model.railroad.mdp.etf.unibl.org"
+        qname="ns:User"
+        type="java:org.unibl.etf.mdp.railroad.model.User"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

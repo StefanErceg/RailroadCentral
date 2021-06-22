@@ -38,7 +38,7 @@ public class TrainLineAPI {
 	}
 	
 	@GET
-	@Path("/{trainStationId}")
+	@Path("/byTrainStation/{trainStationId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainLine> getByTrainStation(@PathParam("trainStationId") String trainStationId) {
 		return service.getByTrainStation(trainStationId);
