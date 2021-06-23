@@ -9,11 +9,7 @@ public class Auth {
 		if (username == null || password == null) return null;
 		return Users.login(username, password);
 	}
-	
-	public boolean usernameExists(String username) {
-		if (username == null) return false;
-		return Users.usernameExists(username);
-	}
+
 	
 	
 }

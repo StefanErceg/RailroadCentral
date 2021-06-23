@@ -13,10 +13,15 @@
       <operation xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deactivate" qname="operNS:deactivate" returnQName="retNS:deactivateReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
       </operation>
+      <operation xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:rtns="http://model.railroad.mdp.etf.unibl.org" name="getUsers" qname="operNS:getUsers" returnQName="retNS:getUsersReturn" returnType="rtns:User" soapAction="">
+      </operation>
       <operation xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="createUser" qname="operNS:createUser" returnQName="retNS:createUserReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" xmlns:tns="http://model.railroad.mdp.etf.unibl.org" qname="pns:user" type="tns:User"/>
       </operation>
-      <parameter name="allowedMethods" value="createUser deactivate"/>
+      <operation xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="usernameExists" qname="operNS:usernameExists" returnQName="retNS:usernameExistsReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="usernameExists getUsers createUser deactivate"/>
 
       <typeMapping xmlns:ns="http://model.railroad.mdp.etf.unibl.org" qname="ns:User" type="java:org.unibl.etf.mdp.railroad.model.User" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
   </service>

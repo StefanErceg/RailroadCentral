@@ -23,10 +23,15 @@
       <operation name="deactivate" qname="operNS:deactivate" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:deactivateReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:username" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
+      <operation name="getUsers" qname="operNS:getUsers" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:getUsersReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:User" xmlns:rtns="http://model.railroad.mdp.etf.unibl.org" soapAction="" >
+      </operation>
       <operation name="createUser" qname="operNS:createUser" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:createUserReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:user" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:User" xmlns:tns="http://model.railroad.mdp.etf.unibl.org"/>
       </operation>
-      <parameter name="allowedMethods" value="createUser deactivate"/>
+      <operation name="usernameExists" qname="operNS:usernameExists" xmlns:operNS="http://soap.railroad.mdp.etf.unibl.org" returnQName="retNS:usernameExistsReturn" xmlns:retNS="http://soap.railroad.mdp.etf.unibl.org" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://soap.railroad.mdp.etf.unibl.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="usernameExists getUsers createUser deactivate"/>
 
       <typeMapping
         xmlns:ns="http://model.railroad.mdp.etf.unibl.org"

@@ -1,5 +1,7 @@
 package org.unibl.etf.mdp.railroad.soap;
 
+import java.util.ArrayList;
+
 import org.unibl.etf.mdp.railroad.data.Users;
 
 public class User {
@@ -13,4 +15,15 @@ public class User {
 		return Users.deactivate(username);
 	}
 
+	public boolean usernameExists(String username) {
+		if (username == null) return false;
+		return Users.usernameExists(username);
+	}
+	
+	public org.unibl.etf.mdp.railroad.model.User[] getUsers() {
+		ArrayList<org.unibl.etf.mdp.railroad.model.User> users = Users.getUsers();
+		return Users.getUsers().toArray(new org.unibl.etf.mdp.railroad.model.User[users.size()]);
+	}
+
 }
+ 
