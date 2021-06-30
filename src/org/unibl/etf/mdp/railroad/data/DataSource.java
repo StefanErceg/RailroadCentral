@@ -14,7 +14,11 @@ public class DataSource {
 	
 	public static boolean addToMap(String key, String field, JSONObject value) {
 		try (Jedis jedis = pool.getResource()) {
-			return jedis.hset(key, field, value.toString()) == 1;
+			jedis.hset(key, field, value.toString());
+			return true;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 	

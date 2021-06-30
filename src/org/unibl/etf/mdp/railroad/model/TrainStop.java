@@ -1,7 +1,6 @@
 package org.unibl.etf.mdp.railroad.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 public class TrainStop implements Serializable {
@@ -9,11 +8,11 @@ public class TrainStop implements Serializable {
 	private static final long serialVersionUID = 3262719492355624614L;
 	
 	private TrainStation trainStation;
-	private Date expectedTime;
+	private String expectedTime;
 	private boolean passed;
-	private Date actualTime;
+	private String actualTime;
 	
-	public TrainStop(TrainStation trainStation, Date expectedTime, boolean passed, Date actualTime) {
+	public TrainStop(TrainStation trainStation, String expectedTime, boolean passed, String actualTime) {
 		super();
 		this.trainStation = trainStation;
 		this.expectedTime = expectedTime;
@@ -38,15 +37,15 @@ public class TrainStop implements Serializable {
 	/**
 	 * @return the expectedTime
 	 */
-	public Date getExpectedTime() {
+	public String getExpectedTime() {
 		return expectedTime;
 	}
 
 	/**
 	 * @param expectedTime the expectedTime to set
 	 */
-	public void setExpectedTime(Date expectedTime) {
-		this.expectedTime = expectedTime;
+	public void setExpectedTime(String expectedTime) {
+		this.expectedTime =  expectedTime;
 	}
 
 	/**
@@ -66,14 +65,14 @@ public class TrainStop implements Serializable {
 	/**
 	 * @return the actualTime
 	 */
-	public Date getActualTime() {
+	public String getActualTime() {
 		return actualTime;
 	}
 
 	/**
 	 * @param actualTime the actualTime to set
 	 */
-	public void setActualTime(Date actualTime) {
+	public void setActualTime(String actualTime) {
 		this.actualTime = actualTime;
 	}
 

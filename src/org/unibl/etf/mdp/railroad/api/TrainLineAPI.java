@@ -62,7 +62,7 @@ public class TrainLineAPI {
 		if (service.update(trainLine)) {
 			return Response.status(200).entity(trainLine).build();
 		}
-		return Response.status(404).build();
+		return Response.status(500).build();
 	}
 	
 	@PUT
@@ -74,7 +74,7 @@ public class TrainLineAPI {
 		if (updated != null) {
 			return Response.status(200).entity(updated).build();
 		}
-		return Response.status(404).build();
+		return Response.status(500).build();
 	}
 	
 	@DELETE

@@ -23,6 +23,7 @@ public class TrainLineService {
 		data.forEach((trainLine) -> {
 			trainLines.add(gson.fromJson(trainLine, TrainLine.class));
 		});
+
 		return trainLines;
 	}
 	
@@ -43,10 +44,6 @@ public class TrainLineService {
 		return data != null ?  gson.fromJson(data.toString(), TrainLine.class) : null;
 	}
 	
-	public TrainLine getByTrainStop(String trainStopId) {
-		ArrayList<TrainLine> allLines = getAll();
-		return null;
-	}
 	
 	public boolean add (TrainLine trainLine) {
 		return DataSource.addToMap(key, trainLine.getId(), new JSONObject(trainLine));
@@ -64,7 +61,7 @@ public class TrainLineService {
 			Integer index = getIndex(trainStops, trainStationId);
 			if (index != -1) {
 				TrainStop trainStop = trainLine.getStops().get(index);
-				trainStop.setActualTime(new Date());
+				trainStop.setActualTime((new Date()).toString());
 				trainStop.setPassed(true);
 				trainLine.getStops().set(index, trainStop);
 			}
@@ -82,13 +79,13 @@ public class TrainLineService {
 	
 	private Integer getIndex(ArrayList<TrainStop> trainStops, String trainStationId) {
 		for (int index = 0; index < trainStops.size(); index++) {
-			if (trainStops.get(index).getTrainStation().getId() == trainStationId) return index;  
+			if (trainStops.get(index).getTrainStation().getId().equals(trainStationId)) return index;  
 		}
 		return -1;
 	}
 	
 	private boolean passesThroughTrainStation(TrainLine trainLine, String trainStationId) {
-		return trainLine.getStart().getId() == trainStationId || trainLine.getDestination().getId() == trainStationId || getIndex(trainLine.getStops(), trainStationId) != -1;
+		return getIndex(trainLine.getStops(), trainStationId) != -1;
 	}
 	
 
