@@ -13,6 +13,10 @@ public class Country implements Serializable {
 	private String name;
 	private String shortName;
 	
+	public Country() {
+		
+	}
+	
 	
 	public Country(String id, String name, String shortName) {
 		super();

@@ -12,6 +12,10 @@ public class TrainStation implements Serializable {
 	private String name;
 	private City city;
 	
+	public TrainStation() {
+		
+	}
+	
 	public TrainStation(String id, String name, City city) {
 		super();
 		this.id = id;

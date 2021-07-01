@@ -12,6 +12,10 @@ public class City implements Serializable {
 	private String name;
 	private Country country;
 	
+	public City() {
+		
+	}
+	
 	
 	
 	public City(String id, String name, Country country) {

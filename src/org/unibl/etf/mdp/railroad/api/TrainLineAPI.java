@@ -13,12 +13,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
 import org.unibl.etf.mdp.railroad.model.TrainLine;
+
+import com.google.gson.Gson;
 
 @Path("/trainLines")
 public class TrainLineAPI {
 	
 	TrainLineService service = new TrainLineService();
+	Gson gson = new Gson();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -47,7 +51,8 @@ public class TrainLineAPI {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response add (TrainLine trainLine) {
+	public Response add (String body) {
+		TrainLine trainLine = gson.fromJson(body, TrainLine.class);
 		if (service.add(trainLine)) {
 			return Response.status(200).entity(trainLine).build();
 		}

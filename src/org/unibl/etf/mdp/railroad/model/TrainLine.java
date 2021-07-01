@@ -16,6 +16,10 @@ public class TrainLine implements Serializable {
 	private String arrivalTime;
 	private ArrayList<TrainStop> stops;
 	
+	public TrainLine() {
+		
+	}
+	
 	public TrainLine(String id, TrainStation start, TrainStation destination, String startTime, String arrivalTime,
 			ArrayList<TrainStop> stops) {
 		super();
@@ -113,6 +117,10 @@ public class TrainLine implements Serializable {
 	 */
 	public String getId() {
 		return id;
+	}
+	
+	public void setId() {
+		this.id = UUID.randomUUID().toString();
 	}
 
 	@Override

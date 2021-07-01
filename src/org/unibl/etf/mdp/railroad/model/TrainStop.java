@@ -12,6 +12,10 @@ public class TrainStop implements Serializable {
 	private boolean passed;
 	private String actualTime;
 	
+	public TrainStop() {
+		
+	}
+	
 	public TrainStop(TrainStation trainStation, String expectedTime, boolean passed, String actualTime) {
 		super();
 		this.trainStation = trainStation;

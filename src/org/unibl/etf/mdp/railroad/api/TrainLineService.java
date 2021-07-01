@@ -46,6 +46,7 @@ public class TrainLineService {
 	
 	
 	public boolean add (TrainLine trainLine) {
+		trainLine.setId();
 		return DataSource.addToMap(key, trainLine.getId(), new JSONObject(trainLine));
 	}
 	
