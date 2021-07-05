@@ -30,6 +30,7 @@ public class CountryService {
 	}
 	
 	public boolean add(Country country) {
+		country.setId();
 		return DataSource.addToMap(key, country.getId(), new JSONObject(country));
 	};
 	

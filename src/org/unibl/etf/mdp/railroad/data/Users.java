@@ -31,16 +31,6 @@ public class Users {
 	private static final String FILE = System.getProperty("user.home") + File.separator + "Railroad" + File.separator + "users.xml";
 	
 	public static void main(String[] args) {
-//		createUser(new User("test1", "test1", "test1", "test1", "0e3bef74-c3e2-4e76-80dd-5c41c6407b77"));
-//		createUser(new User("test2", "test2", "test2", "test2", "8b5c6952-c822-4fce-9988-2e02506da4cd"));
-//		createUser(new User("test3", "test3", "test3", "test3", "8b5c6952-c822-4fce-9988-2e02506da4cd"));
-//		System.out.println(login("aaa", "aaa"));
-//		System.out.println(login("test3", "test4"));
-//		System.out.println(login("test1", "test1"));
-//		System.out.println(login("test2", "test2"));
-//		deactivate("test2");
-//		System.out.println(login("test2", "test2"));
-//		getUsers().forEach((user) -> {System.out.println(user);});
 	}
 	
 	public static ArrayList<User> getUsers() {

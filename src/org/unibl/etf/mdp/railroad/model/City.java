@@ -31,6 +31,10 @@ public class City implements Serializable {
 		this.name = name;
 		this.country = country;
 	}
+	
+	public void setId() {
+		this.id = UUID.randomUUID().toString();
+	}
 
 	/**
 	 * @return the id

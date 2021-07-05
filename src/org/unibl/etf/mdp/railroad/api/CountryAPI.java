@@ -15,10 +15,13 @@ import javax.ws.rs.core.Response;
 
 import org.unibl.etf.mdp.railroad.model.Country;
 
+import com.google.gson.Gson;
+
 @Path("/countries")
 public class CountryAPI {
 	
 	CountryService service;
+	Gson gson = new Gson();
 	
 	public CountryAPI() {
 		service = new CountryService();
@@ -44,8 +47,9 @@ public class CountryAPI {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response add(Country country) {
-		if (service.add(country) ) {
+	public Response add(String body) {
+		Country country = gson.fromJson(body, Country.class);
+		if (service.add(country)) {
 			return Response.status(200).entity(country).build();
 		}
 		return Response.status(500).entity("Problem with adding country").build();

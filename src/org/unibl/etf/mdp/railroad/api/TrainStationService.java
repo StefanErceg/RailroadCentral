@@ -30,6 +30,7 @@ public class TrainStationService {
 	}
 	
 	public boolean add(TrainStation trainStation) {
+		trainStation.setId();
 		return DataSource.addToMap(key, trainStation.getId(), new JSONObject(trainStation));
 	}
 	

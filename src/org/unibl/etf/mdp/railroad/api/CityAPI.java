@@ -15,10 +15,13 @@ import javax.ws.rs.core.Response;
 
 import org.unibl.etf.mdp.railroad.model.City;
 
+import com.google.gson.Gson;
+
 @Path("/cities")
 public class CityAPI {
 	
 	CityService service;
+	Gson gson = new Gson();
 	
 	public CityAPI() {
 		service = new CityService();
@@ -44,7 +47,8 @@ public class CityAPI {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response add(City city) {
+	public Response add(String body) {
+		City city = gson.fromJson(body, City.class);
 		if (service.add(city)) {
 			return Response.status(200).entity(city).build();
 		}

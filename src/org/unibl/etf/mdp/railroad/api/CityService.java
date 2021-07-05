@@ -31,6 +31,7 @@ public class CityService {
 	}
 	
 	public boolean add(City city) {
+		city.setId();
 		return DataSource.addToMap(key, city.getId(), new JSONObject(city));
 	}
 	

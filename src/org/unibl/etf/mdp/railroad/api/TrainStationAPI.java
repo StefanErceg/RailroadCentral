@@ -15,10 +15,13 @@ import javax.ws.rs.core.Response;
 
 import org.unibl.etf.mdp.railroad.model.TrainStation;
 
+import com.google.gson.Gson;
+
 @Path("/trainStations")
 public class TrainStationAPI {
 	
 	TrainStationService service = new TrainStationService();
+	Gson gson = new Gson();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -40,7 +43,8 @@ public class TrainStationAPI {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response add(TrainStation trainStation) {
+	public Response add(String body) {
+		TrainStation trainStation = gson.fromJson(body, TrainStation.class);
 		if (service.add(trainStation)) {
 			Response.status(200).entity(trainStation).build();
 		}

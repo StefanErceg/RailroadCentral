@@ -31,6 +31,10 @@ public class Country implements Serializable {
 		this.name = name;
 		this.shortName = shortName;
 	}
+	
+	public void setId() {
+		this.id = UUID.randomUUID().toString();
+	}
 
 	/**
 	 * @return the id

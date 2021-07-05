@@ -29,6 +29,10 @@ public class TrainStation implements Serializable {
 		this.name = name;
 		this.city = city;
 	}
+	
+	public void setId() {
+		this.id = UUID.randomUUID().toString();
+	}
 
 	/**
 	 * @return the id
